@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    class ScheduleException
+    public class ScheduleException
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
