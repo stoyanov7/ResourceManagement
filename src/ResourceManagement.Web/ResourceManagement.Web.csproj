@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -12,6 +12,10 @@
     <ProjectReference Include="..\ResourceManagement.Data\ResourceManagement.Data.csproj" />
     <ProjectReference Include="..\ResourceManagement.Domain\ResourceManagement.Domain.csproj" />
     <ProjectReference Include="..\ResourceManagement.Infrastructure\ResourceManagement.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
 </Project>
