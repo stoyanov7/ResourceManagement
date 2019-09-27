@@ -7,6 +7,8 @@ namespace ResourceManagement.Web
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using ResourceManagement.Data;
+    using ResourceManagement.Domain;
+    using ResourceManagement.Infrastructure;
     using ResourceManagement.Web.Data;
 
     public class Startup
@@ -26,6 +28,8 @@ namespace ResourceManagement.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddTransient<IScheduleService, ScheduleService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

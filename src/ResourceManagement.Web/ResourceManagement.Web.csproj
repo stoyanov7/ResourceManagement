@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ResourceManagement.Data\ResourceManagement.Data.csproj" />
+    <ProjectReference Include="..\ResourceManagement.Domain\ResourceManagement.Domain.csproj" />
+    <ProjectReference Include="..\ResourceManagement.Infrastructure\ResourceManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
