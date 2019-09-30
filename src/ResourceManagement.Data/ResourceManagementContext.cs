@@ -31,6 +31,8 @@
                 .HasOne(pt => pt.PersonType)
                 .WithMany(t => t.PersonPersonTypes)
                 .HasForeignKey(pt => pt.PersonTypeId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
