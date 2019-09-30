@@ -1,9 +1,10 @@
 ﻿namespace ResourceManagement.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using ResourceManagement.Models;
 
-    public class ResourceManagementContext : DbContext
+    public class ResourceManagementContext : IdentityDbContext
     {
         public ResourceManagementContext(DbContextOptions<ResourceManagementContext> options) 
             : base(options)

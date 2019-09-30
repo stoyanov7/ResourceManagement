@@ -5,19 +5,19 @@ VisualStudioVersion = 16.0.29311.281
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{130EA8EF-298B-4BD4-B87D-212481622FF3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Web", "src\ResourceManagement.Web\ResourceManagement.Web.csproj", "{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Models", "src\ResourceManagement.Models\ResourceManagement.Models.csproj", "{C1F3E23D-7905-40E1-B4AD-05E868A97F91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Data", "src\ResourceManagement.Data\ResourceManagement.Data.csproj", "{7FC4AD34-B00B-48D0-A3DF-6769BEA391E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceManagement.Domain", "src\ResourceManagement.Domain\ResourceManagement.Domain.csproj", "{25327B96-FD23-477B-8A55-4CCB21CA8C9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Domain", "src\ResourceManagement.Domain\ResourceManagement.Domain.csproj", "{25327B96-FD23-477B-8A55-4CCB21CA8C9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceManagement.Infrastructure", "src\ResourceManagement.Infrastructure\ResourceManagement.Infrastructure.csproj", "{BE1161CD-E199-40A3-910F-4B7C0A37B47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Infrastructure", "src\ResourceManagement.Infrastructure\ResourceManagement.Infrastructure.csproj", "{BE1161CD-E199-40A3-910F-4B7C0A37B47C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceManagement.Infrastructure.Test", "test\ResourceManagement.Infrastructure.Test\ResourceManagement.Infrastructure.Test.csproj", "{ABAE4A4E-C1EF-481A-8E55-7DD6BCB79E35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Infrastructure.Test", "test\ResourceManagement.Infrastructure.Test\ResourceManagement.Infrastructure.Test.csproj", "{ABAE4A4E-C1EF-481A-8E55-7DD6BCB79E35}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{55D139AC-EDA7-446A-B34D-88BCD548FB3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResourceManagement.Web", "..\..\..\source\repos\ResourceManagement.Web\ResourceManagement.Web\ResourceManagement.Web.csproj", "{088B293A-0083-4D4A-8FEE-EF37B36D8D07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,18 +29,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Debug|x64.Build.0 = Debug|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Debug|x86.Build.0 = Debug|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Release|x64.ActiveCfg = Release|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Release|x64.Build.0 = Release|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Release|x86.ActiveCfg = Release|Any CPU
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41}.Release|x86.Build.0 = Release|Any CPU
 		{C1F3E23D-7905-40E1-B4AD-05E868A97F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1F3E23D-7905-40E1-B4AD-05E868A97F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F3E23D-7905-40E1-B4AD-05E868A97F91}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -101,17 +89,29 @@ Global
 		{ABAE4A4E-C1EF-481A-8E55-7DD6BCB79E35}.Release|x64.Build.0 = Release|Any CPU
 		{ABAE4A4E-C1EF-481A-8E55-7DD6BCB79E35}.Release|x86.ActiveCfg = Release|Any CPU
 		{ABAE4A4E-C1EF-481A-8E55-7DD6BCB79E35}.Release|x86.Build.0 = Release|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Debug|x64.Build.0 = Debug|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Debug|x86.Build.0 = Debug|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Release|x64.ActiveCfg = Release|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Release|x64.Build.0 = Release|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Release|x86.ActiveCfg = Release|Any CPU
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0CEB1959-FD4F-41CB-86CD-5FC148A92E41} = {130EA8EF-298B-4BD4-B87D-212481622FF3}
 		{C1F3E23D-7905-40E1-B4AD-05E868A97F91} = {130EA8EF-298B-4BD4-B87D-212481622FF3}
 		{7FC4AD34-B00B-48D0-A3DF-6769BEA391E9} = {130EA8EF-298B-4BD4-B87D-212481622FF3}
 		{25327B96-FD23-477B-8A55-4CCB21CA8C9B} = {130EA8EF-298B-4BD4-B87D-212481622FF3}
 		{BE1161CD-E199-40A3-910F-4B7C0A37B47C} = {130EA8EF-298B-4BD4-B87D-212481622FF3}
 		{ABAE4A4E-C1EF-481A-8E55-7DD6BCB79E35} = {55D139AC-EDA7-446A-B34D-88BCD548FB3C}
+		{088B293A-0083-4D4A-8FEE-EF37B36D8D07} = {130EA8EF-298B-4BD4-B87D-212481622FF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {434D65A7-2C04-43FA-B9C4-FB2C0DD659D2}
