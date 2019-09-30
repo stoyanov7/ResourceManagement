@@ -13,9 +13,13 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         public string CronPattern { get; set; }        
 
-        public ScheduleStatus Status { get; set; }     
+        public ScheduleStatus Status { get; set; }
+
+        public TimeSpan Duration { get; set; }
 
         public DateTime MinStartDateTime { get; set; }
 

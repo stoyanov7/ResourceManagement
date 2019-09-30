@@ -13,6 +13,8 @@
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         public ScheduleStatus Status { get; set; }
 
         public DateTime StartDateTime { get; set; }
