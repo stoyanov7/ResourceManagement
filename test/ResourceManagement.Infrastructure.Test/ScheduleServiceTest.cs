@@ -1,5 +1,7 @@
 namespace ResourceManagement.Infrastructure.Test
 {
+    using Moq;
+    using ResourceManagement.Domain.Logger;
     using ResourceManagement.Models;
     using System;
     using System.Collections.Generic;
@@ -25,6 +27,34 @@ namespace ResourceManagement.Infrastructure.Test
             }
         };
 
+        private readonly Schedule MyMultipleRecurringSchedule = new Schedule
+        {
+            RecurringSchedules = new List<RecurringSchedule>
+            {
+                    new RecurringSchedule
+                    {
+                        MinStartDateTime = new DateTime(2018, 6, 1),
+                        MaxEndDateTime = new DateTime(2018, 6, 30),
+                        CronPattern = "0 15 * * 1",
+                        Duration = TimeSpan.FromHours(1)
+                    },
+                    new RecurringSchedule
+                    {
+                        MinStartDateTime = new DateTime(2020, 5, 1),
+                        MaxEndDateTime = new DateTime(2020, 5, 31),
+                        CronPattern = "0 15 * * 1",
+                        Duration = TimeSpan.FromHours(1)
+                    }
+            }
+        };
+
+        private readonly Mock<IMyLogger<ScheduleService>> mockLogger;
+
+        public ScheduleServiceTest()
+        {
+            this.mockLogger = new Mock<IMyLogger<ScheduleService>>();
+        }
+
         [Fact]
         public void ShouldCreateTheScheduleItemsSpecified()
         {
@@ -42,7 +72,7 @@ namespace ResourceManagement.Infrastructure.Test
             };
 
             // Act
-            var sut = new ScheduleService();
+            var sut = new ScheduleService(this.mockLogger.Object);
             var results = sut.ExpandSchedule(mySchedule, new DateTime(2019, 1, 1), new DateTime(2019, 12, 31));
 
             // assert
@@ -54,7 +84,7 @@ namespace ResourceManagement.Infrastructure.Test
         public void ShouldCreateMultipleScheduleItemsSpecified()
         {
             // Act
-            var sut = new ScheduleService();
+            var sut = new ScheduleService(this.mockLogger.Object);
             var results = sut.ExpandSchedule(MultipleItemSchedule, new DateTime(2019, 1, 1), new DateTime(2019, 12, 31));
 
             // Assert
@@ -68,7 +98,7 @@ namespace ResourceManagement.Infrastructure.Test
         public void ShouldExpandWithinDatesSpecified()
         {
             // Act
-            var sut = new ScheduleService();
+            var sut = new ScheduleService(this.mockLogger.Object);
             var results = sut.ExpandSchedule(MultipleItemSchedule, new DateTime(2019, 1, 1), new DateTime(2019, 5, 18));
 
             // Assert
@@ -93,7 +123,7 @@ namespace ResourceManagement.Infrastructure.Test
             };
 
             // Act
-            var sut = new ScheduleService();
+            var sut = new ScheduleService(this.mockLogger.Object);
             var results = sut.ExpandSchedule(schedule, new DateTime(2019, 1, 1), new DateTime(2019, 12, 31));
 
             // assert
@@ -120,11 +150,78 @@ namespace ResourceManagement.Infrastructure.Test
             };
 
             // Act
-            var sut = new ScheduleService();
+            var sut = new ScheduleService(this.mockLogger.Object);
             var results = sut.ExpandSchedule(schedule, new DateTime(2019, 5, 1), new DateTime(2019, 5, 15));
 
             // assert
             Assert.Equal(2, results.Count());
+            Assert.Equal(15, results.First().StartDateTime.Hour);
+        }
+
+        [Fact]
+        public void MultipleRecurringSchedules_ShouldExpandWithinRequestedDatesOnly_NoIntersection()
+        {
+            // Act
+            var sut = new ScheduleService(this.mockLogger.Object);
+            var results = sut.ExpandSchedule(MyMultipleRecurringSchedule, new DateTime(2019, 5, 1), new DateTime(2019, 5, 15));
+
+            // Assert
+            Assert.Empty(results);
+        }
+
+        [Fact]
+        public void ShouldExpandWithinRequestedDatesOnly_Scenario4()
+        {
+            // Arrange
+            var schedule = new Schedule
+            {
+                RecurringSchedules = new List<RecurringSchedule>
+                {
+                    new RecurringSchedule
+                    {
+                        MinStartDateTime = new DateTime(2019, 5, 1),
+                        MaxEndDateTime = new DateTime(2019, 5, 31),
+                        CronPattern = "0 15 * * 1",
+                        Duration = TimeSpan.FromHours(1)
+                    }
+                }
+            };
+
+            // Act
+            var sut = new ScheduleService(this.mockLogger.Object);
+            var results = sut.ExpandSchedule(schedule, new DateTime(2019, 4, 1), new DateTime(2019, 6, 1));
+
+            // Assert
+            Assert.Equal(4, results.Count());
+            Assert.Equal(15, results.First().StartDateTime.Hour);
+        }
+
+        [Fact]
+        public void ShouldExpandWithinRequestedDatesOnly_Scenario6()
+        {
+            // arrange
+            var schedule = new Schedule
+            {
+                RecurringSchedules = new List<RecurringSchedule>
+                {
+                    new RecurringSchedule
+                    {
+                        MinStartDateTime = new DateTime(2019, 5, 1),
+                        MaxEndDateTime = new DateTime(2019, 5, 31),
+                        CronPattern = "0 15 * * 1",
+                        Duration = TimeSpan.FromHours(1)
+                    }
+                }
+            };
+            //act
+            var sut = new ScheduleService(this.mockLogger.Object);
+            var results = sut.ExpandSchedule(schedule, new DateTime(2019, 4, 27), new DateTime(2019, 5, 24));
+            //assert
+            Assert.Equal(3, results.Count());
+            Assert.Equal(15, results.First().StartDateTime.Hour);
+
+            results = sut.ExpandSchedule(schedule, new DateTime(2019, 4, 27), new DateTime(2019, 5, 31));
+            Assert.Equal(4, results.Count());
             Assert.Equal(15, results.First().StartDateTime.Hour);
         }
     }
