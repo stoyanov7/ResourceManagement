@@ -10,7 +10,7 @@ namespace ResourceManagement.Infrastructure.Test
     {
         private readonly Schedule MultipleItemSchedule = new Schedule()
         {
-            ScheduleItems = new List<ScheduleItem> 
+            ScheduleItems = new List<ScheduleItem>
             {
                 new ScheduleItem
                 {
@@ -31,9 +31,9 @@ namespace ResourceManagement.Infrastructure.Test
             // Arrange
             var mySchedule = new Schedule()
             {
-                ScheduleItems = new List<ScheduleItem> 
+                ScheduleItems = new List<ScheduleItem>
                 {
-                    new ScheduleItem 
+                    new ScheduleItem
                     {
                         StartDateTime=new DateTime(2019, 5, 17, 15, 0, 0),
                         EndDateTime = new DateTime(2019, 5, 17, 16, 0, 0)
@@ -73,6 +73,59 @@ namespace ResourceManagement.Infrastructure.Test
 
             // Assert
             Assert.Single(results);
+        }
+
+        [Fact]
+        public void ShouldExpandWithinDelimitedDatesOnly()
+        {
+            var schedule = new Schedule
+            {
+                RecurringSchedules = new List<RecurringSchedule>
+                {
+                    new RecurringSchedule
+                    {
+                        MinStartDateTime = new DateTime(2019, 5, 1),
+                        MaxEndDateTime = new DateTime(2019, 5, 31),
+                        CronPattern = "0 15 * * 1",
+                        Duration = TimeSpan.FromHours(1)
+                    }
+                }
+            };
+
+            // Act
+            var sut = new ScheduleService();
+            var results = sut.ExpandSchedule(schedule, new DateTime(2019, 1, 1), new DateTime(2019, 12, 31));
+
+            // assert
+            Assert.Equal(4, results.Count());
+            Assert.Equal(15, results.First().StartDateTime.Hour);
+        }
+
+        [Fact]
+        public void ShouldExpandWithinRequestedDatesOnly()
+        {
+            // Arrange
+            var schedule = new Schedule
+            {
+                RecurringSchedules = new List<RecurringSchedule>
+                {
+                    new RecurringSchedule
+                    {
+                        MinStartDateTime = new DateTime(2019, 5, 1),
+                        MaxEndDateTime = new DateTime(2019, 5, 31),
+                        CronPattern = "0 15 * * 1",
+                        Duration = TimeSpan.FromHours(1)
+                    }
+                }
+            };
+
+            // Act
+            var sut = new ScheduleService();
+            var results = sut.ExpandSchedule(schedule, new DateTime(2019, 5, 1), new DateTime(2019, 5, 15));
+
+            // assert
+            Assert.Equal(2, results.Count());
+            Assert.Equal(15, results.First().StartDateTime.Hour);
         }
     }
 }
