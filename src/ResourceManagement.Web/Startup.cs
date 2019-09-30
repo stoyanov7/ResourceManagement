@@ -8,7 +8,9 @@ namespace ResourceManagement.Web
     using Microsoft.Extensions.Hosting;
     using ResourceManagement.Data;
     using ResourceManagement.Domain;
+    using ResourceManagement.Domain.Logger;
     using ResourceManagement.Infrastructure;
+    using ResourceManagement.Infrastructure.Logger;
     using ResourceManagement.Web.Data;
 
     public class Startup
@@ -29,6 +31,7 @@ namespace ResourceManagement.Web
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
 
+            services.AddScoped(typeof(IMyLogger<>), typeof(MyLogger<>));
             services.AddTransient<IScheduleService, ScheduleService>();
         }
 
